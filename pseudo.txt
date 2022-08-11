@@ -1,0 +1,15 @@
+Aftter setTime();
+-------------------------------------------------------------
+// Loop through the questions while time remains
+    $.each(questions, showQuestion(iQuestions){
+        // get the question to display
+        var question = questions[i]["Question"];
+        // display the question
+        
+        // for each option in questions...
+        var optionCount = questions[i]["Options"]
+        for(iOptions = 0, iOptions < optionCount, i++){
+            // Create a button for the option
+        }
+    });
+-------------------------------------------------------------

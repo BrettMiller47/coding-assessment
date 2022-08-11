@@ -1,26 +1,44 @@
 var questions = {
-    "Question_1": {
-        "Qeustion": "Pseudo -elements such as ::before and ::after are part of the DOM.",
-        "Options": ["True", "False"],
-        "Answer": "False",
-        "Explanation": "The DOM is built from the source HTML document alone, and the pseudo-elements are part of the CSSOM and render tree."
+    "question1": {
+        "question": "Pseudo -elements such as ::before and ::after are part of the DOM.",
+        "options": ["True", "False"],
+        "answer": "False",
+        "explanation": "The DOM is built from the source HTML document alone, and the pseudo-elements are part of the CSSOM and render tree."
     },
-    "Question_2": {
-        "Question": "The tag <h1> is referred to as which of the following:",
-        "Options": ["element", "class", "attribute", "none of the above"],
-        "Answer": "True",
-        "Explanation": "HTML tags are elements."
+    "Question2": {
+        "question": "The tag <h1> is referred to as which of the following:",
+        "options": ["element", "class", "attribute", "none of the above"],
+        "answer": "True",
+        "explanation": "HTML tags are elements."
     },
-    "Question_3": {
-        "Question": "The hashtag (#) symbol is used to select which attribute in css?",
-        "Options": ["class", "ID", "data", "style"],
-        "Answer": "ID",
-        "Explanation": "The # symbol is used for ID attributes."
+    "Question3": {
+        "question": "The hashtag (#) symbol is used to select which attribute in css?",
+        "options": ["class", "ID", "data", "style"],
+        "answer": "ID",
+        "explanation": "The # symbol is used for ID attributes."
     },
-    "Question_4": {
-        "Question": "In css, a period (.) is used before a word to select a...",
-        "Options": ["class", "ID", "data", "style"],
-        "Answer": "class",
-        "Explanation": "The . symbol is used for classes."
+    "Question4": {
+        "question": "In css, a period (.) is used before a word to select a...",
+        "options": ["class", "ID", "data", "style"],
+        "answer": "class",
+        "explanation": "The . symbol is used for classes."
     }
 }
+
+var submitBtnEl = document.querySelector("#start-button");
+
+var timeRem = 75;
+
+// function to set the time
+function setTime() {
+    
+}
+
+// function to start the quiz
+function startQuiz() {
+    // start the timer
+    setTime();
+}
+
+// // event listener for start button click 
+// submitBtnEl.addEventListener("click", startQuiz)
