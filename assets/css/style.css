@@ -18,8 +18,6 @@ a {
     text-decoration: none;
 }
 
-.main-row {
-    display: flex;
+.main {
     justify-content: center;
-    background: var(--highlight);
 }
