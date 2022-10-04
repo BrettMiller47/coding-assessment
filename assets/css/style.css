@@ -13,9 +13,10 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background: var(--dark);
-    color: var(--light);
+    background: var(--light);
+    color: var(--highlight);
     text-decoration: none;
+    padding: 20px;
 }
 
 .main {

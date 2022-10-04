@@ -16,18 +16,15 @@ Aftter setTime();
 
 questions & answer sections
 -------------------------------------------------------------
-        <section class="main-row">
-            <h1 id="question">asdf</p>
-        </section>
-        <section id="answer-options" class="main-row">
+        <header id="question">
+            QUESTION
+        </header>
+        <section>
             <!-- make from from javascript for question options -->
             <div class="container">
                 <div class="row m-2 justify-content-center">
-                    <button class="col-4 btn btn-primary" type="button">Button</button>
+                    <button class="col-4 btn btn-primary" type="button">OPTION</button>
                 </div>
-            <div class="row m-2 justify-content-center">
-                <button class="col-4 btn btn-primary" type="button">Button</button>
-            </div>
             </div>
         </section>
         <section class="main-row">

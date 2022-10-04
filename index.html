@@ -11,17 +11,57 @@
 <body>
     <header class="header-row">
         <h3>
-            <a href="">View high scores</a>
+            <a id="highScoreBtn" href="javascript:;" onclick="showHighScore()">View high score</a>
         </h3>
         <h3 id="#time">Time: 0</h3>
     </header>
     <main id="main">
-        <div class="container">
-            <h1>Coding Quiz!</h1>
-            <button class="col w-100 btn btn-primary" type="button">Start</button>
-        </div>
+        <section id="startScreen" class="container p-3">
+            <h1 class="font-size: 2em">Coding Quiz!</h1>
+            <button id="start" class="col w-100 btn btn-primary" type="button">Start</button>
+        </section>
+        <section id="questAndOptions" style="display: none;">
+            <div class="container">
+                <h3 id="question" class="row m-2 justify-content-center">
+                    The tag &lt;h1&gt; is referred to as which of the following:
+                </h3>
+            </div>
+            <div class="container">
+                <div class="row m-2 justify-content-center">
+                    <button id="option1" class="col-4 btn btn-primary option-btn" type="button"></button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-2 justify-content-center">
+                    <button id="option2" class="col-4 btn btn-primary option-btn" type="button"></button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-2 justify-content-center">
+                    <button id="option3" class="col-4 btn btn-primary option-btn" type="button"></button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row m-2 justify-content-center">
+                    <button id="option4" class="col-4 btn btn-primary option-btn" type="button"></button>
+                </div>
+            </div>
+        </section>
+        <section id="yourScoreContainer" class="container p-3" style="display: none;">
+            <div class="row g-3">
+                <h3 class="col-auto">Your Score:</h3>
+                <h3 class="col-auto" id="yourScoreVal"></h3>
+            </div>
+        </section>
+        <section id="highScoreContainer" class="container p-3" style="display: none;">
+            <div class="row g-3">
+                <h3 class="col-auto">High Score:</h3>
+                <h3 class="col-auto" id="highScoreVal"></h3>
+            </div>
+        </section>
+
     </main>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="./assets/js/script.js"></script>
+<script src="./assets/js/script.js"></script>
 </html>

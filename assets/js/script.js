@@ -1,139 +1,149 @@
-// --- GLOBAL VARIABLES ---
-var questions = {
-    "question1": {
-        "question": "Pseudo -elements such as ::before and ::after are part of the DOM.",
-        "options": ["True", "False"],
-        "answer": "False",
-        "explanation": "The DOM is built from the source HTML document alone, and the pseudo-elements are part of the CSSOM and render tree."
-    },
-    "Question2": {
+const questions = [
+    {
         "question": "The tag <h1> is referred to as which of the following:",
         "options": ["element", "class", "attribute", "none of the above"],
-        "answer": "True",
+        "answer": "element",
         "explanation": "HTML tags are elements."
     },
-    "Question3": {
+    {
         "question": "The hashtag (#) symbol is used to select which attribute in css?",
         "options": ["class", "ID", "data", "style"],
         "answer": "ID",
         "explanation": "The # symbol is used for ID attributes."
     },
-    "Question4": {
+    {
         "question": "In css, a period (.) is used before a word to select a...",
         "options": ["class", "ID", "data", "style"],
         "answer": "class",
         "explanation": "The . symbol is used for classes."
     }
-}
-var highScores = {
-    "n/a": 0,
-    "n/a": 0,
-    "n/a": 0,
-};
+]
 
-var rootEl = document.querySelector("#main")
-var timerEl = document.querySelector("#time");
-var startEl = document.querySelector("#start");
-var submitEl = document.querySelector('#submit');
+const timerEl = document.querySelector("#time");
+
+const startScreenEl = document.querySelector('#startScreen');
+const startEl = document.querySelector("#start");
+
+const questAndOptionsEl = document.querySelector('#questAndOptions');
+const questionEl = document.querySelector('#question');
+const option1BtnEl = document.querySelector('#option1');
+const option2BtnEl = document.querySelector('#option2');
+const option3BtnEl = document.querySelector('#option3');
+const option4BtnEl = document.querySelector('#option4');
+
+const scoreEl = document.querySelector('#score');
+const yourScoreContainerEl = document.querySelector('#yourScoreContainer');
+const yourScoreValEl = document.querySelector('#yourScoreVal');
+
+const highScoreBtnEl = document.querySelector('#highScoreBtn');
+const highScoreContainerEl = document.querySelector('#highScoreContainer');
+const highScoreValEl = document.querySelector('#highScoreVal');
 
 var timeRem = 75;
-
+var currQuestIdx = 0;
+var score = 0;
+var highScore = 0;
 
 // --- FUNCTIONS ---
-// function to set the time
-function countdown() {
-  var timeInterval = setInterval(function () {
-    // if there is still time remaining
-    if (timeRem > 1) {
-      timerEl.textContent = "Time: " + timeRem;
-      // Decrement `timeRem` by 1
-      timeRem--;
-    } else {
-      // time has run out so set 'timeRem' textContent to show 0
-      timerEl.textContent = 'Time: 0';
-      // Use `clearInterval()` to stop the timer
-      clearInterval(timeInterval);
-    }
-  }, 1000);
+// !function to set the time
+function setTime() {
+    // Sets interval in variable
+    let timerInterval = setInterval(function() {
+        timeRem--;
+        timerEl.textContent = "Time " + timeRem;
+
+        if(timeRem === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timerInterval);
+            endQuiz();
+            }
+    }, 1000);
 }
 
-// function to start the quiz
+// !function to start the quiz
 function startQuiz() {
-    // start the timer (if timer runs out must stop questioning the user)
-    countdown();
-    // construct questions until all are answered
-    displayNextQuestion(null);
+    
+    // declare the score variable
+    var score = 0;
 
+    // hide the startScreen and highScoreContainerEl
+    startScreenEl.style.display = "none";
+    highScoreContainerEl.style.display = "none";
+    
+    // TODO: start the timer (if timer runs out must stop questioning the user)
+    // setTime();   
+    
+    getNextQuestOrEndQuiz(currQuestIdx);
 }
 
 // function to return boolean regarding quiz completion
-function isAnotherQuestion(prevQuestIndex) {
-    var countQuestions = Object.keys(questions).length;
-    // if all questions have been answered...
-    if (prevQuestIndex != countQuestions) {
-        return true;
+function getNextQuestOrEndQuiz(idx) {      
+    if (idx < questions.length) {
+        // change textContent for question & option fields
+        questionEl.textContent = questions[idx].question;
+        option1BtnEl.textContent = questions[idx].options[0];
+        option2BtnEl.textContent = questions[idx].options[1];
+        option3BtnEl.textContent = questions[idx].options[2];
+        option4BtnEl.textContent = questions[idx].options[3];
+        // display the questions and options
+        questAndOptionsEl.style.display = "";    
     } else {
-        return false;
-    }
+        endQuiz()
+    }    
 }
 
-// function to display next question
-function displayNextQuestion(prevQuestIndex) {
-    // if this is the first question displayed...
-    if (prevQuestIndex === null) {
-        var nextQuestIndex = 0;
-    // if this is not the first question and there is another question...
-    } else if (isAnotherQuestion(prevQuestIndex)) {
-        var nextQuestIndex = prevQuestIndex++;
-    // if no questions remain...
-    } else {
-        var score = timeRem;
-        endQuizAndDisplayScore(score);
-        return;
-    }
-
-    // display next question via dynamic html
-    // create a <header> for the question and append to the root element 
-    var questionEl = document.createElement("<header>")
-    var questionText = questions[nextQuestIndex]["question"];
-    questionEl.textContent = questionText;
-    questionEl.attributes("class", "question");
-    rootEl.append(questionEl);
+// function to evaluate the answer and proceed to next question
+function evaluateAnswer(e) {
+    let answer = e.target.textContent;
+    let correctAnswer = questions[currQuestIdx].answer 
     
-    // create and append a button (to the rootEl) for each answer option
-    var countOptions = object.questions[nextQuestIndex]["question"]["options"].length;
-    for (var indexOptions = 0, indexOptions < countOptions, indexOptions++) {
-        // create a button
-        var buttonEl = document.createElement("<button>");
-        var buttonText = questions[nextQuestIndex]["options"][indexOptions];
-        buttonEl.textContent(buttonText);
-        buttonEl.attributes("class", "col-4 btn btn-primary");
-        buttonEl.attributes("type", "button");
-        // create a container for the button
-        var containerEl = document.createElement("<div>");
-        containerEl.attributes("class", "container");
-        // append the button to the container
-        containerEl.append(buttonEl);
-        // append the container (with button now appended) to the root element
-        rootEl.append(containerEl);
+    if (answer == correctAnswer) {
+        score++;
     }
-}   
-
-// funtion to display the endgame screen where user initials and score can be saved
-function endQuizAndDisplayScore(score) {
-
+    // proceed to the next question or end the quiz if no questions remain
+    currQuestIdx++;
+    getNextQuestOrEndQuiz(currQuestIdx);
+    timeRem = 75;
 }
 
-function showHighScores() {
-    var leaderboardLength = 3;
+function endQuiz() {
     
+    // Show results
+    questAndOptionsEl.style.display = "none";
+    highScoreContainerEl.style.display = "none";
+    yourScoreValEl.textContent = score;
+    yourScoreContainerEl.style.display = "";
+    startScreenEl.style.display = "";   
+
+    // update highScore
+    if (highScore < score) {
+        highScore = score;
+    }
 }
 
+// function to show high score
+function showHighScore(event) {
+    // reset any variables that may need resetting
+    timeRem = 75;
+    score = 0;
+    currQuestIdx = 0;
+    
+    // hide other elements
+    questAndOptionsEl.style.display = "none";
+    // show the startScreenEl and highScoreContainerEl
+    startScreenEl.style.display = "";
+    highScoreValEl.textContent = highScore;
+    highScoreContainerEl.style.display = "";
+}
 
-// --- EVENT LISTENERS ---
+// event listener for 'View High Score' click 
+highScoreBtnEl.addEventListener("click", showHighScore);
+
 // event listener for start button click
-// startBtnEl.addEventListener("click", startQuiz);
+startEl.addEventListener("click", startQuiz);
 
-
-// event listener for question answered
-// submitEl.addEventListener("click", nextQuestion(numQuestAnswered));
+// event listeners for answer option clicks
+option1BtnEl.addEventListener("click", evaluateAnswer);
+option2BtnEl.addEventListener("click", evaluateAnswer);
+option3BtnEl.addEventListener("click", evaluateAnswer);
+option4BtnEl.addEventListener("click", evaluateAnswer);
