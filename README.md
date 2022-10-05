@@ -1,8 +1,8 @@
 # coding-assessment
 
-A 75 second coding assessment with a leaderboard for best scores.
+A timed coding assessment with three questions and a high score tracker.
 
-Deployed Application: https://buttabrett.github.io/coding-assessment
+Deployed Application: https://brettmiller47.github.io/coding-assessment/
 
 ![Desktop View](./assets/images/desktop.png)
 ![Mobile View](./assets/images/mobile.png)
