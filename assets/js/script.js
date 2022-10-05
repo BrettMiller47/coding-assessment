@@ -19,7 +19,7 @@ const questions = [
     }
 ]
 
-const timerEl = document.querySelector("#time");
+const timerEl = document.getElementById("#time");
 
 const startScreenEl = document.querySelector('#startScreen');
 const startEl = document.querySelector("#start");
@@ -44,23 +44,25 @@ var currQuestIdx = 0;
 var score = 0;
 var highScore = 0;
 
-// --- FUNCTIONS ---
-// !function to set the time
+// function to set the time
 function setTime() {
     // Sets interval in variable
-    let timerInterval = setInterval(function() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+    var timerInterval = setInterval(function () {
         timeRem--;
-        timerEl.textContent = "Time " + timeRem;
+        timerEl.textContent = `Time: ${timeRem}`;
 
-        if(timeRem === 0) {
+        if (timeRem === 0) {
             // Stops execution of action at set interval
             clearInterval(timerInterval);
             endQuiz();
-            }
+        }
     }, 1000);
 }
 
-// !function to start the quiz
+// function to start the quiz
 function startQuiz() {
     
     // declare the score variable
@@ -69,10 +71,9 @@ function startQuiz() {
     // hide the startScreen and highScoreContainerEl
     startScreenEl.style.display = "none";
     highScoreContainerEl.style.display = "none";
-    
-    // TODO: start the timer (if timer runs out must stop questioning the user)
-    // setTime();   
-    
+    yourScoreContainerEl.style.display = "none";    
+
+    setTime();   
     getNextQuestOrEndQuiz(currQuestIdx);
 }
 
@@ -88,7 +89,7 @@ function getNextQuestOrEndQuiz(idx) {
         // display the questions and options
         questAndOptionsEl.style.display = "";    
     } else {
-        endQuiz()
+        timeRem = 1;
     }    
 }
 
@@ -103,11 +104,10 @@ function evaluateAnswer(e) {
     // proceed to the next question or end the quiz if no questions remain
     currQuestIdx++;
     getNextQuestOrEndQuiz(currQuestIdx);
-    timeRem = 75;
 }
 
 function endQuiz() {
-    
+
     // Show results
     questAndOptionsEl.style.display = "none";
     highScoreContainerEl.style.display = "none";
@@ -119,6 +119,9 @@ function endQuiz() {
     if (highScore < score) {
         highScore = score;
     }
+
+    currQuestIdx = 0;
+    timeRem = 75;
 }
 
 // function to show high score
